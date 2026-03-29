@@ -1,0 +1,565 @@
+/* Neon Tokyo — CSS Zen Garden
+   Theme: Electric Nightscape (Retro-Futurism)
+   CSS3 used with vendor prefixes per Zen Garden submission guidelines.
+   Graceful degradation for IE9+. Tested: IE9+, Chrome, Firefox, Safari, iOS, Android. */
+
+/* CSS2: @import for web fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&family=Inter:wght@400;500&family=Space+Grotesk:wght@400;500&display=swap');
+
+/* --- Reset (CSS1/2) --------------------------------------- */
+html {
+	margin: 0;
+	padding: 0;
+	}
+
+/* --- Base (CSS1/2) ---------------------------------------- */
+body {
+	font-family: 'Inter', georgia, sans-serif;
+	font-size: 14px;
+	line-height: 1.8;
+	color: #c8c8d8;
+	background-color: #0a0a12;
+	/* CSS3: multiple background images — scan-line texture layered over solid base color.
+	   Graceful degradation: IE9 shows solid #0a0a12 only. */
+	background-image: -webkit-repeating-linear-gradient(top, transparent, transparent 3px, rgba(0, 255, 204, 0.015) 3px, rgba(0, 255, 204, 0.015) 4px);
+	background-image:    -moz-repeating-linear-gradient(top, transparent, transparent 3px, rgba(0, 255, 204, 0.015) 3px, rgba(0, 255, 204, 0.015) 4px);
+	background-image:      -o-repeating-linear-gradient(top, transparent, transparent 3px, rgba(0, 255, 204, 0.015) 3px, rgba(0, 255, 204, 0.015) 4px);
+	background-image:         repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(0, 255, 204, 0.015) 3px, rgba(0, 255, 204, 0.015) 4px);
+	background-attachment: fixed;
+	margin: 0;
+	padding: 0;
+	}
+
+p {
+	margin-top: 0;
+	margin-bottom: 14px;
+	text-align: left;
+	}
+
+abbr {
+	border-bottom: none;
+	}
+
+/* --- Typography (CSS1/2) ---------------------------------- */
+h1, h2, h3 {
+	font-family: 'Sora', georgia, sans-serif;
+	font-weight: bold;
+	line-height: 1.2;
+	margin-top: 0;
+	}
+
+h3 {
+	font-size: 11px;
+	font-style: normal;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: #ff2d78;
+	margin-bottom: 12px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #55112a;
+	}
+
+/* CSS3: position + padding for ::before accent on content section headings.
+   Applied only to .intro and .supporting h3, not sidebar headings. */
+.intro h3,
+.supporting h3 {
+	position: relative;
+	padding-left: 12px;
+	}
+
+/* CSS3: ::before pseudo-element — glowing neon left-bar on section headings.
+   Decorative accent using pseudo-elements instead of extra HTML divs,
+   per Zen Garden guidelines (use ::before/::after, not .extra divs). */
+.intro h3::before,
+.supporting h3::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 1px;
+	width: 4px;
+	height: 78%;
+	background-color: #ff2d78;
+	-webkit-box-shadow: 0 0 6px #ff2d78;
+	   -moz-box-shadow: 0 0 6px #ff2d78;
+	        box-shadow: 0 0 6px #ff2d78;
+	}
+
+/* --- Links (CSS1/2) --------------------------------------- */
+a:link {
+	font-weight: bold;
+	text-decoration: none;
+	color: #00ffcc;
+	/* CSS3: transition with full vendor prefix stack */
+	-webkit-transition: color 0.2s ease, text-shadow 0.2s ease;
+	   -moz-transition: color 0.2s ease, text-shadow 0.2s ease;
+	     -o-transition: color 0.2s ease, text-shadow 0.2s ease;
+	        transition: color 0.2s ease, text-shadow 0.2s ease;
+	}
+
+a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: #009980;
+	}
+
+a:hover, a:focus, a:active {
+	text-decoration: underline;
+	color: #00ffcc;
+	/* CSS3: text-shadow — graceful degradation, IE9 ignores silently */
+	text-shadow: 0 0 8px #00ffcc;
+	}
+
+/* --- Page Layout: float + absolute (CSS2) ----------------- */
+/* Right padding reserves space for the absolutely-positioned sidebar */
+.page-wrapper {
+	padding: 25px 250px 60px 30px;
+	margin: 0 auto;
+	max-width: 1100px;
+	position: relative;
+	background-color: #0a0a12;
+	}
+
+/* CSS3: ::after pseudo-element — neon top accent bar spanning the full page width.
+   Replaces what would otherwise need an extra HTML element, per Zen Garden guidelines. */
+.page-wrapper::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background-color: #ff2d78;
+	-webkit-box-shadow: 0 0 14px #ff2d78;
+	   -moz-box-shadow: 0 0 14px #ff2d78;
+	        box-shadow: 0 0 14px #ff2d78;
+	}
+
+/* --- Intro (CSS1/2) --------------------------------------- */
+.intro {
+	width: 100%;
+	padding-bottom: 28px;
+	margin-bottom: 28px;
+	border-bottom: 1px solid #55112a;
+	}
+
+/* Header: plain block stacking — no floats, no image replacement */
+header[role="banner"] {
+	padding-bottom: 18px;
+	margin-bottom: 18px;
+	border-bottom: 1px solid #2a0a14;
+	/* CSS2 overflow to contain any stray floats */
+	overflow: hidden;
+	height: auto;
+	}
+
+header h1 {
+	/* Cancel original image-replacement technique */
+	background: none;
+	width: auto;
+	height: auto;
+	float: none;
+	display: block;
+	text-indent: 0;
+	white-space: normal;
+	overflow: visible;
+	margin-top: 0;
+	margin-bottom: 6px;
+
+	font-family: 'Sora', georgia, sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	/* Solid color: safe for all browsers including IE9 */
+	color: #e0e0f0;
+	}
+
+header h2 {
+	/* Cancel original image-replacement technique */
+	background: none;
+	width: auto;
+	height: auto;
+	float: none;
+	display: block;
+	text-indent: 0;
+	white-space: normal;
+	overflow: visible;
+	margin-top: 0;
+	margin-bottom: 0;
+
+	font-family: 'Space Grotesk', verdana, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	color: #00ffcc;
+	}
+
+/* Summary: float left — sits beside .preamble as a card */
+.summary {
+	float: left;
+	clear: none;
+	width: 200px;
+	margin: 0 22px 14px 0;
+	padding: 14px 16px;
+	background-color: #10101e;
+	/* CSS3: border-radius with vendor prefixes */
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	border: 1px solid #005c47;
+	}
+
+.summary p {
+	font-family: 'Inter', georgia, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	text-align: left;
+	color: #c8c8d8;
+	margin-bottom: 8px;
+	}
+
+.summary p:last-child {
+	margin-bottom: 0;
+	}
+
+/* Preamble: overflow:hidden creates a CSS2 block formatting context (BFC).
+   A BFC block never overlaps a sibling float — it fills the remaining width
+   automatically, giving two side-by-side cards with no overlap. */
+.preamble {
+	overflow: hidden;
+	padding: 14px 16px;
+	background-color: #10101e;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	border: 1px solid #2d0f1e;
+	border-left: 3px solid #ff2d78;
+	}
+
+.preamble p {
+	font-size: 13px;
+	color: #a0a0b8;
+	}
+
+/* --- Main Content (CSS1/2) -------------------------------- */
+.supporting {
+	clear: both;
+	padding-left: 0;
+	margin-bottom: 40px;
+	}
+
+/* Article cards: solid surface with left accent border */
+.explanation,
+.participation,
+.benefits,
+.requirements {
+	margin-bottom: 22px;
+	padding: 18px 22px;
+	background-color: #10101e;
+	border: 1px solid #2d0f1e;
+	border-left: 3px solid #ff2d78;
+	/* CSS3: border-radius with vendor prefixes */
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	/* CSS3: transition with vendor prefixes */
+	-webkit-transition: border-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+	   -moz-transition: border-color 0.3s ease,    -moz-box-shadow 0.3s ease;
+	     -o-transition: border-color 0.3s ease,         box-shadow 0.3s ease;
+	        transition: border-color 0.3s ease,         box-shadow 0.3s ease;
+	}
+
+.explanation:hover,
+.participation:hover,
+.benefits:hover,
+.requirements:hover {
+	border-color: #66163a;
+	border-left-color: #ff2d78;
+	/* CSS3: box-shadow with vendor prefixes */
+	-webkit-box-shadow: 0 0 16px rgba(255, 45, 120, 0.3);
+	   -moz-box-shadow: 0 0 16px rgba(255, 45, 120, 0.3);
+	        box-shadow: 0 0 16px rgba(255, 45, 120, 0.3);
+	}
+
+.explanation p,
+.participation p,
+.benefits p,
+.requirements p {
+	font-size: 13px;
+	color: #a8a8c0;
+	}
+
+/* CSS3: :first-child — lead paragraph in each article card rendered slightly brighter.
+   Targets non-classed elements using structural pseudo-class per Zen Garden guidelines. */
+.explanation p:first-child,
+.participation p:first-child,
+.benefits p:first-child,
+.requirements p:first-child {
+	color: #c8c8d8;
+	}
+
+/* --- Footer (CSS1/2 inline-block) ------------------------- */
+footer {
+	clear: both;
+	padding-top: 18px;
+	margin-top: 8px;
+	border-top: 1px solid #55112a;
+	/* overflow hidden acts as micro clearfix */
+	overflow: hidden;
+	}
+
+footer a:link,
+footer a:visited {
+	font-family: 'Space Grotesk', verdana, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #6e6e88;
+	/* inline-block: CSS2, works IE9+ cleanly */
+	display: inline-block;
+	margin-right: 6px;
+	margin-bottom: 6px;
+	padding: 5px 10px;
+	border: 1px solid #2a2a3a;
+	background-color: #16162a;
+	/* CSS3: border-radius with vendor prefixes */
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	text-decoration: none;
+	/* CSS3: transition with vendor prefixes */
+	-webkit-transition: color 0.2s ease, border-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+	   -moz-transition: color 0.2s ease, border-color 0.2s ease,    -moz-box-shadow 0.2s ease;
+	     -o-transition: color 0.2s ease, border-color 0.2s ease,         box-shadow 0.2s ease;
+	        transition: color 0.2s ease, border-color 0.2s ease,         box-shadow 0.2s ease;
+	}
+
+footer a:hover,
+footer a:focus {
+	color: #ff2d78;
+	border-color: #ff2d78;
+	text-decoration: none;
+	/* CSS3: box-shadow + text-shadow with vendor prefixes */
+	-webkit-box-shadow: 0 0 12px rgba(255, 45, 120, 0.35);
+	   -moz-box-shadow: 0 0 12px rgba(255, 45, 120, 0.35);
+	        box-shadow: 0 0 12px rgba(255, 45, 120, 0.35);
+	text-shadow: 0 0 6px #ff2d78;
+	}
+
+/* --- Sidebar: absolute positioning (CSS2) ----------------- */
+.sidebar {
+	position: absolute;
+	top: 25px;
+	right: 30px;
+	width: 210px;
+	margin-left: 0;
+	}
+
+.sidebar .wrapper {
+	font-family: 'Space Grotesk', verdana, sans-serif;
+	font-size: 11px;
+	background-color: #10101e;
+	border: 1px solid #55112a;
+	/* CSS3: border-radius with vendor prefixes */
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+	padding: 14px;
+	margin-top: 0;
+	width: auto;
+	}
+
+/* Override image-replacement on sidebar headings */
+.sidebar h3.select,
+.sidebar h3.archives,
+.sidebar h3.resources {
+	background: none;
+	width: auto;
+	height: auto;
+	text-indent: 0;
+	white-space: normal;
+	overflow: visible;
+
+	font-family: 'Space Grotesk', verdana, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: #ff2d78;
+	margin: 0 0 8px 0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #3a0a16;
+	}
+
+.sidebar h3.archives,
+.sidebar h3.resources {
+	margin-top: 20px;
+	}
+
+.sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}
+
+.sidebar li {
+	background: none;
+	padding: 4px 0;
+	margin-bottom: 0;
+	line-height: 1.45;
+	border-bottom: 1px solid #1a1a2a;
+	list-style-type: none;
+	}
+
+.sidebar li:last-child {
+	border-bottom: none;
+	}
+
+/* CSS3: :first-child — remove top padding on the first item in sidebar lists */
+.sidebar li:first-child {
+	padding-top: 0;
+	}
+
+.sidebar li a.design-name {
+	display: block;
+	color: #00ffcc;
+	font-weight: bold;
+	font-size: 11px;
+	}
+
+.sidebar li a.design-name:visited {
+	color: #009980;
+	}
+
+.sidebar li a.design-name:hover,
+.sidebar li a.design-name:focus {
+	color: #00ffcc;
+	text-decoration: underline;
+	/* CSS3: text-shadow — graceful degradation */
+	text-shadow: 0 0 8px #00ffcc;
+	}
+
+.sidebar li a.designer-name {
+	display: block;
+	color: #6e6e88;
+	font-size: 10px;
+	font-weight: normal;
+	}
+
+.sidebar li a.designer-name:visited {
+	color: #6e6e88;
+	}
+
+.sidebar li a.designer-name:hover,
+.sidebar li a.designer-name:focus {
+	color: #c8c8d8;
+	text-decoration: none;
+	}
+
+.sidebar li a:link {
+	color: #6e6e88;
+	font-weight: normal;
+	font-size: 11px;
+	}
+
+.sidebar li a:visited {
+	color: #6e6e88;
+	}
+
+.sidebar li a:hover,
+.sidebar li a:focus {
+	color: #00ffcc;
+	text-decoration: underline;
+	/* CSS3: text-shadow — graceful degradation */
+	text-shadow: 0 0 6px #00ffcc;
+	}
+
+.sidebar li.next a,
+.sidebar li.viewall a {
+	color: #6e6e88;
+	font-size: 11px;
+	}
+
+.sidebar li.next a:hover,
+.sidebar li.viewall a:hover {
+	color: #00ffcc;
+	}
+
+.sidebar li.next .indicator {
+	color: #6e6e88;
+	}
+
+.sidebar li.next a:hover .indicator {
+	color: #00ffcc;
+	}
+
+/* --- Extra divs: hidden — ::before/::after used for decoration instead ----------- */
+/* Per Zen Garden guidelines: don't rely on .extra divs, use pseudo-elements. */
+.extra1, .extra2, .extra3,
+.extra4, .extra5, .extra6 {
+	display: none;
+	}
+
+/* --- Responsive: Tablet (CSS3 @media — IE9+) -------------- */
+@media screen and (max-width: 800px) {
+	.page-wrapper {
+		padding: 20px 20px 50px 20px;
+		}
+
+	.sidebar {
+		position: static;
+		width: auto;
+		margin-top: 30px;
+		right: auto;
+		top: auto;
+		}
+
+	.sidebar .wrapper {
+		width: auto;
+		}
+
+	.summary {
+		float: none;
+		width: auto;
+		margin-right: 0;
+		margin-bottom: 14px;
+		}
+
+	.preamble {
+		overflow: visible;
+		}
+	}
+
+/* --- Responsive: Mobile (CSS3 @media — IE9+) -------------- */
+@media screen and (max-width: 480px) {
+	.page-wrapper {
+		padding: 15px 12px 40px 12px;
+		}
+
+	header h1 {
+		font-size: 28px;
+		letter-spacing: 1px;
+		}
+
+	header h2 {
+		font-size: 9px;
+		letter-spacing: 3px;
+		}
+
+	.explanation,
+	.participation,
+	.benefits,
+	.requirements {
+		padding: 14px 16px;
+		margin-bottom: 16px;
+		}
+
+	footer a:link,
+	footer a:visited {
+		font-size: 9px;
+		padding: 4px 8px;
+		}
+	}
