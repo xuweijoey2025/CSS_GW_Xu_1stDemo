@@ -6,7 +6,7 @@ Basic Information for Demo1:
 - Time Consumption: 30mins, 60mins debug
 - Tools: Stitch design system DESIGN.md, VS code GitHub Copilot (Claude sonnet 4.5)
 - Process Summary: Keep HTML, request applying the .md file and updating CSS
-- Manual Browser Check: Chrome,Safari
+- Manual Browser Check: Chrome,Safari,IE9(simulation)
 
 Webpage Demos:
 - Demo1 URL: https://xuweijoey2025.github.io/CSS_GW_Xu_1stDemo/
